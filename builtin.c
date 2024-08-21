@@ -6,11 +6,11 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:05:27 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/11 18:05:29 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:27:14 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
 
 void	echo_cmd(char **args)
 {

@@ -6,14 +6,14 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:05:49 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/11 18:11:51 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:29:51 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -38,5 +38,7 @@ void	*safe_malloc(size_t size);
 void	change_directory(const char *path);
 char	*get_current_directory(void);
 void	print_exit_status(int status);
+void	inline_code(int argc, char **argv);
+void	err_exit(char *str);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:04:56 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/11 18:06:34 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:27:30 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
 
 // Signal handler for SIGINT (Ctrl-C)
 void	handle_sigint(int sig)

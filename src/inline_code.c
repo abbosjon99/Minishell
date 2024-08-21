@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   inline_code.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/11 18:06:19 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/08/21 18:40:09 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/08/21 19:31:00 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-void	signal_handler(int sig)
+void	inline_code(int argc, char **argv)
 {
-	if (sig == SIGINT)
+	if (argc >= 2)
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_redisplay();
+		if (ft_strncmp(argv[1], "-c", 3))
+			err_exit("Usage: ./minishell -c \"Commands here\"");
+		else if (argc == 2)
+			err_exit("minishell: -c: option requires an argument");
+		printf("%s\n", argv[2]);
 	}
-}
-
-int	main(void)
-{
-	char	*input;
-
-	signal(SIGINT, signal_handler);
-	while (1)
-	{
-		input = readline("minishell> ");
-		if (!input)
-			break ;
-		if (*input)
-			add_history(input);
-		// Parse and execute the command here
-		// ...
-		free(input);
-	}
-	return (0);
 }
