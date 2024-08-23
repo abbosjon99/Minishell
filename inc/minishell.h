@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:05:49 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/21 19:29:51 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/08/23 22:56:47 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 # include "../libft/libft.h"
 # include <errno.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdlib.h>
 # include <string.h>
-# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
