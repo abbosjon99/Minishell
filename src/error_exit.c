@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:17:56 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/21 19:19:25 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/08/25 12:23:29 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../inc/minishell.h"
 
 void	err_exit(char *str)
 {

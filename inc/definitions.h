@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:05:27 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/25 12:23:52 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/09/01 23:52:52 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/09/02 16:03:29 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#ifndef DEFINITIONS_H
+# define DEFINITIONS_H
 
-void	echo_cmd(char **args)
+typedef enum e_parcer_out
 {
-	int	newline;
+	CORRECT,
+	WRONG,
+	EMPTY,
+	ERROR
+}	t_parcer_out;
 
-	newline = 1;
-	if (args[1] && strcmp(args[1], "-n") == 0)
-	{
-		newline = 0;
-		args++;
-	}
-	for (int i = 1; args[i]; i++)
-	{
-		printf("%s", args[i]);
-		if (args[i + 1])
-			printf(" ");
-	}
-	if (newline)
-		printf("\n");
-}
+#endif

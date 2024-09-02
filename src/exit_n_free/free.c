@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:05:27 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/25 12:23:52 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/09/02 16:08:50 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/09/02 16:33:23 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#include "../../inc/definitions.h"
+#include "../../inc/minishell.h"
 
-void	echo_cmd(char **args)
+void	free_n_exit(t_data *data, int exit_code)
 {
-	int	newline;
+	free_data(data);
+	exit(exit_code);
+}
 
-	newline = 1;
-	if (args[1] && strcmp(args[1], "-n") == 0)
-	{
-		newline = 0;
-		args++;
-	}
-	for (int i = 1; args[i]; i++)
-	{
-		printf("%s", args[i]);
-		if (args[i + 1])
-			printf(" ");
-	}
-	if (newline)
-		printf("\n");
+// SHOULD CHECK IF I NEED TO FREE USER NAME
+void	free_data(t_data *data)
+{
+	if (data->live_input)
+		free(data->live_input);
+	if (data->username)
+		free(data->username);
 }

@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   get_variables.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:05:27 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/25 12:23:52 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/09/02 16:20:46 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/09/02 16:44:34 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#include "../../inc/minishell.h"
 
-void	echo_cmd(char **args)
+char	*get_username(t_data *data)
 {
-	int	newline;
+	(void)data;
+	return (getenv("USER"));
+}
 
-	newline = 1;
-	if (args[1] && strcmp(args[1], "-n") == 0)
-	{
-		newline = 0;
-		args++;
-	}
-	for (int i = 1; args[i]; i++)
-	{
-		printf("%s", args[i]);
-		if (args[i + 1])
-			printf(" ");
-	}
-	if (newline)
-		printf("\n");
+char	*get_path(void)
+{
+	return ("/idunno");
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+         #
+#    By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/08/21 19:28:15 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/09/02 16:43:25 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,10 @@
 SRCS = src/minishell.c \
 		src/error_exit.c \
 		src/inline_code.c \
+		src/data_init.c \
+		src/exit_n_free/free.c \
+		src/lexer/parcer.c \
+		src/utils/get_variables.c \
 		builtin.c \
 		execute.c \
 		redirection.c \

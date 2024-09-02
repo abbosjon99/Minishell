@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:05:14 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/21 18:27:34 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/08/25 12:23:52 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // utils.c
-#include "includes/minishell.h"
+#include "inc/minishell.h"
 
 // Function to print an error message and exit
 void	print_error(const char *msg)

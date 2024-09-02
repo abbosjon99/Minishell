@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/23 22:56:47 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:36:34 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,32 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-// Function declarations
-void	handle_sigint(int sig);
-void	handle_sigquit(int sig);
-void	setup_signals(void);
+typedef struct s_data
+{
+	char	*live_input;
+	char	*username;
+	bool	is_intrctv;
+}			t_data;
 
-void	print_error(const char *msg);
-void	*safe_malloc(size_t size);
-void	change_directory(const char *path);
-char	*get_current_directory(void);
-void	print_exit_status(int status);
-void	inline_code(int argc, char **argv);
-void	err_exit(char *str);
+// Function declarations
+void		handle_sigint(int sig);
+void		handle_sigquit(int sig);
+void		setup_signals(void);
+
+void		print_error(const char *msg);
+void		*safe_malloc(size_t size);
+void		change_directory(const char *path);
+char		*get_current_directory(void);
+void		print_exit_status(int status);
+void		inline_code(t_data *data, char *code, char **envp);
+void		err_exit(char *str);
+void		free_data(t_data *data);
+void		free_n_exit(t_data *data, int exit_code);
+
+char		*get_path(void);
+char		*get_username(t_data *data);
+
+bool		data_init(t_data *data, char **argv);
+bool		parcer_input_valid(t_data *data);
 
 #endif

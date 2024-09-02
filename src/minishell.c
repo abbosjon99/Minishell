@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/21 19:30:27 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:37:50 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../inc/minishell.h"
 
 void	signal_handler(int sig)
 {
@@ -22,25 +22,47 @@ void	signal_handler(int sig)
 	}
 }
 
-// int	main(int argc, char **argv, char **env)
-int	main(int argc, char **argv)
+// Initial checking the arguments, if any error prints error
+// If -c command is here it will redirect everything to inline mode
+static void	argv_check(t_data *data, int argc, char **argv)
 {
-	char	*input;
-
 	if (argc > 1)
 	{
-		inline_code(argc, argv);
+		if (ft_strncmp(argv[1], "-c", 3))
+			err_exit("Usage: ./minishell -c \"Commands here\"");
+		else if (argc == 2)
+			err_exit("minishell: -c: Option requires an argument");
+		data->is_intrctv = true;
 	}
-	signal(SIGINT, signal_handler);
+}
+
+// We will handle empty user input
+static void	intrctv_shell(t_data *data, char **envp)
+{
+	(void)*envp;
 	while (1)
 	{
-		input = readline("minishell> ");
-		if (!input)
-			break ;
-		if (*input)
-			add_history(input);
-
-		free(input);
+		signal(SIGINT, signal_handler);
+		printf("%s", get_username(data));
+		data->live_input = readline("@minishell> ");
+		if (NULL == data->live_input)
+			return ;
+		if (false == parcer_input_valid(data))
+			continue ;
 	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_data	data;
+
+	ft_memset(&data, 0, sizeof(t_data));
+	argv_check(&data, argc, argv);
+	data_init(&data, envp);
+	if (data.is_intrctv)
+		inline_code(&data, argv[2], envp);
+	else
+		intrctv_shell(&data, envp);
+	free_data(&data);
 	return (0);
 }
