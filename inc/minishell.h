@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/02 16:36:34 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:09:22 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	char	*live_input;
 	char	*username;
 	bool	is_intrctv;
+	int		exit_code;
 }			t_data;
 
 // Function declarations

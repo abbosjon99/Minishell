@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/02 16:37:50 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:10:38 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,5 @@ int	main(int argc, char **argv, char **envp)
 		inline_code(&data, argv[2], envp);
 	else
 		intrctv_shell(&data, envp);
-	free_data(&data);
-	return (0);
+	free_n_exit(&data, data.exit_code);
 }

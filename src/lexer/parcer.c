@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 23:37:52 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/02 16:44:12 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/03 00:21:31 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,26 @@ static bool	is_all_space(char *str)
 	return (true);
 }
 
+static bool	quote_matcher(char *str)
+{
+	char	quote;
+
+	quote = 0;
+	while (*str)
+	{
+		if (*str == '"' || *str == '\'')
+		{
+			if (quote == 0)
+				quote = *str;
+			else if (quote == *str)
+				quote = 0;
+		}
+		str++;
+	}
+	return (quote == 0);
+}
+
+// If string is null then it means there were an error with readline
 // In case of empty string or space we return false
 bool	parcer_input_valid(t_data *data)
 {
@@ -35,5 +55,7 @@ bool	parcer_input_valid(t_data *data)
 		return (false);
 	}
 	add_history(data->live_input);
+	if (false == quote_matcher(data->live_input))
+		printf("Typing error with unclosed quotes!!\n");
 	return (true);
 }
