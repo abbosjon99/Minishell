@@ -6,12 +6,21 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:08:50 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/02 16:33:23 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:15:01 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/definitions.h"
 #include "../../inc/minishell.h"
+
+// frees data after every line commands
+// and returns the result
+int	free4inline(t_data *data, int result)
+{
+	if (data->live_input)
+		free(data->live_input);
+	return (result);
+}
 
 void	free_n_exit(t_data *data, int exit_code)
 {
@@ -20,10 +29,10 @@ void	free_n_exit(t_data *data, int exit_code)
 }
 
 // SHOULD CHECK IF I NEED TO FREE USER NAME
+// frees the data before exit
 void	free_data(t_data *data)
 {
-	if (data->live_input)
-		free(data->live_input);
+	free4inline(data, 0);
 	if (data->username)
 		free(data->username);
 }

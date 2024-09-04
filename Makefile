@@ -6,20 +6,20 @@
 #    By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/09/02 16:43:25 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/09/04 16:47:27 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Files
 SRCS = src/minishell.c \
-		src/error_exit.c \
-		src/inline_code.c \
-		src/data_init.c \
-		src/exit_n_free/free.c \
+		src/built-in/cd.c	src/built-in/echo.c	src/built-in/env.c \
+		src/built-in/exit.c	src/built-in/export.c	src/built-in/pwd.c \
+		src/built-in/unset.c \
+		src/exit_n_free/error_exit.c	src/exit_n_free/free.c \
+		src/inline_code.c	src/data_init.c \
 		src/lexer/parcer.c \
 		src/utils/get_variables.c \
-		builtin.c \
-		execute.c \
+		src/execute/execute.c \
 		redirection.c \
 		signal.c \
 		utils.c

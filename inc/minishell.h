@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/02 17:09:22 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:14:05 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void		inline_code(t_data *data, char *code, char **envp);
 void		err_exit(char *str);
 void		free_data(t_data *data);
 void		free_n_exit(t_data *data, int exit_code);
+int			free4inline(t_data *data, int result);
 
 char		*get_path(void);
 char		*get_username(t_data *data);

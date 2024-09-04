@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 23:37:52 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/03 00:21:31 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:14:12 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ bool	parcer_input_valid(t_data *data)
 		free_n_exit(data, 1);
 	if (0 == data->live_input[0] || is_all_space(data->live_input))
 	{
-		free(data->live_input);
-		return (false);
+		return (free4inline(data, false));
 	}
 	add_history(data->live_input);
 	if (false == quote_matcher(data->live_input))
