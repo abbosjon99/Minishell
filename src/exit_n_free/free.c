@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:08:50 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/04 12:15:01 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/20 15:27:48 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/definitions.h"
 #include "../../inc/minishell.h"
 
 // frees data after every line commands
