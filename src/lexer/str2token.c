@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmdsplit.c                                      :+:      :+:    :+:   */
+/*   str2token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:25:44 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/21 19:33:26 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:59:54 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static char	**ft_splitfnorm(size_t size, size_t len, char *str, char **r)
+// strdup fail should be adressed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+static bool	ft_splitfnorm(size_t size, size_t len, char *str, t_token **tk)
 {
 	size_t	i;
 	size_t	j;
@@ -27,9 +28,9 @@ static char	**ft_splitfnorm(size_t size, size_t len, char *str, char **r)
 	}
 	while (size--)
 	{
-		r[j] = ft_strdup(str + i++);
-		if (!(r[j]))
-			return (NULL);
+		tk[j]->str = ft_strdup(str + i++);
+		if (!tk[j]->str)
+			return (false);
 		j++;
 		while (i < len)
 		{
@@ -38,7 +39,7 @@ static char	**ft_splitfnorm(size_t size, size_t len, char *str, char **r)
 			i++;
 		}
 	}
-	return (r);
+	return (true);
 }
 
 static size_t	ft_strcountnull(char *str, size_t len)
@@ -72,25 +73,46 @@ static size_t	ft_strcountnull(char *str, size_t len)
 	return (size);
 }
 
-char	**cmd_split(char const *s)
+static bool	split_token(t_data *data)
 {
 	size_t	size;
 	size_t	len;
 	char	*str;
-	char	**result;
 
-	if (!s)
-		return (NULL);
-	str = ft_strdup(s);
+	if (!data->live_input)
+		return (false);
+	str = ft_strdup(data->live_input);
 	if (!str)
-		return (NULL);
-	len = ft_strlen(str);
+		return (false);
+	len = ft_strlen(data->live_input);
 	size = ft_strcountnull(str, len);
-	result = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!result)
-		return (NULL);
-	result = ft_splitfnorm(size, len, str, result);
+	data->tokens = (t_token **)malloc(sizeof(t_token *) * (size + 1));
+	if (!data->tokens)
+	{
+		free(str);
+		return (false);
+	}
+	if (!ft_splitfnorm(size, len, str, data->tokens))
+	{
+		free(str);
+		return (false);
+	}
 	free(str);
-	result[size] = NULL;
-	return (result);
+	data->tokens[size]->str = NULL;
+	return (true);
+}
+
+bool	str2token(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (!split_token(data))
+		return (false);
+	while (data->tokens[i]->str)
+	{
+		printf("%s\n", data->tokens[i]->str);
+		i++;
+	}
+	return (true);
 }

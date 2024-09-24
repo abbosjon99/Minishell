@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/21 19:03:56 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/22 23:00:03 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		free4inline(t_data *data, int result);
 
 char	*get_path(void);
 char	*get_username(t_data *data);
-char	**cmd_split(char const *s);
+bool	str2token(t_data *data);
 
 bool	data_init(t_data *data, char **argv);
 bool	parcer_input_valid(t_data *data);
