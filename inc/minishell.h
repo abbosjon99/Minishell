@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/04 12:14:05 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:04:58 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include "./definitions.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -29,14 +30,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-
-typedef struct s_data
-{
-	char	*live_input;
-	char	*username;
-	bool	is_intrctv;
-	int		exit_code;
-}			t_data;
 
 // Function declarations
 void		handle_sigint(int sig);
