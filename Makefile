@@ -6,17 +6,23 @@
 #    By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/08/11 18:11:15 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/09/22 22:56:16 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Files
-SRCS = minishell.c \
-       builtin.c \
-       execute.c \
-       redirection.c \
-       signal.c \
-       utils.c
+SRCS = src/minishell.c \
+		src/built-in/cd.c	src/built-in/echo.c	src/built-in/env.c \
+		src/built-in/exit.c	src/built-in/export.c	src/built-in/pwd.c \
+		src/built-in/unset.c \
+		src/exit_n_free/error_exit.c	src/exit_n_free/free.c \
+		src/inline_code.c	src/data_init.c \
+		src/lexer/parcer.c	src/lexer/str2token.c\
+		src/utils/get_variables.c \
+		src/execute/execute.c \
+		redirection.c \
+		signal.c \
+		utils.c
 
 # Sources and objects
 OBJS = $(SRCS:.c=.o)

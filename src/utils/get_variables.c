@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   get_variables.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:04:35 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/25 12:23:52 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/09/02 16:20:46 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/09/02 16:44:34 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#include "../../inc/minishell.h"
 
-void	redirect_output(const char *filename)
+char	*get_username(t_data *data)
 {
-	int	fd;
+	(void)data;
+	return (getenv("USER"));
+}
 
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		perror("open");
-		return ;
-	}
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
+char	*get_path(void)
+{
+	return ("/idunno");
 }

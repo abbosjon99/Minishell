@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:04:35 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/25 12:23:52 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/08/11 18:04:25 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/09/04 16:47:48 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/minishell.h"
+#include "../../inc/minishell.h"
 
-void	redirect_output(const char *filename)
+void	execute_command(char *cmd, char **argv)
 {
-	int	fd;
+	pid_t	pid;
 
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
+	pid = fork();
+	if (pid == 0)
 	{
-		perror("open");
-		return ;
+		execve(cmd, argv, NULL);
+		perror("execve");
+		_exit(1);
 	}
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
+	else
+	{
+		wait(NULL);
+	}
 }

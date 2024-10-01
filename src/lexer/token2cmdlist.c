@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   token2cmdlist.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/08/11 18:06:19 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/09/20 15:25:44 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/09/22 21:09:06 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../inc/minishell.h"
 
-void	signal_handler(int sig)
+bool    token2cmdlist(t_data *data, char **token)
 {
-	if (sig == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
-
-int	main(void)
-{
-	char	*input;
-
-	signal(SIGINT, signal_handler);
-	while (1)
-	{
-		input = readline("minishell> ");
-		if (!input)
-			break ;
-		if (*input)
-			add_history(input);
-		// Parse and execute the command here
-		// ...
-		free(input);
-	}
-	return (0);
+    
 }
