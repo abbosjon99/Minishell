@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parcer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 23:37:52 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/05 23:02:26 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:56:53 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/definitions.h"
 #include "../../inc/minishell.h"
 
 static bool	is_all_space(char *str)
@@ -57,5 +56,6 @@ bool	parcer_input_valid(t_data *data)
 	if (false == quote_matcher(data->live_input))
 		printf("Typing error with unclosed quotes!!\n");
 	//some errors
+	str2token(data);
 	return (true);
 }
