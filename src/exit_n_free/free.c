@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:08:50 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/20 15:27:48 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/06 21:01:41 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	free_n_exit(t_data *data, int exit_code)
 void	free_data(t_data *data)
 {
 	free4inline(data, 0);
-	if (data->username)
-		free(data->username);
+	// if (data->username)
+	// 	free(data->username);
 }

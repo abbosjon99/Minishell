@@ -55,6 +55,7 @@ bool	parcer_input_valid(t_data *data)
 	add_history(data->live_input);
 	if (false == quote_matcher(data->live_input))
 		printf("Typing error with unclosed quotes!!\n");
+	//some errors
 	str2token(data);
 	return (true);
 }

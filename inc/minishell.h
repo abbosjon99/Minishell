@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/09/22 23:00:03 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:04:58 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include "definitions.h"
+# include "./definitions.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
