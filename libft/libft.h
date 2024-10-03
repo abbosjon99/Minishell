@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 14:57:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/05/03 19:56:36 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:24:22 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <unistd.h>
+# include "ft_printf/ft_printf.h"
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <stdint.h>
-# include "ft_printf/ft_printf.h"
+# include <unistd.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

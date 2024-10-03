@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeldiya <akeldiya@student.42warsaw.pl>    +#+  +:+       +#+         #
+#    By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 11:38:04 by akeldiya          #+#    #+#              #
-#    Updated: 2024/05/03 21:51:17 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/10/03 14:24:33 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

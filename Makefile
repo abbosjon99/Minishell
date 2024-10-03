@@ -3,26 +3,64 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+         #
+#    By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/09/22 22:56:16 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/10/03 18:46:23 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Files
-SRCS = src/minishell.c \
-		src/built-in/cd.c	src/built-in/echo.c	src/built-in/env.c \
-		src/built-in/exit.c	src/built-in/export.c	src/built-in/pwd.c \
-		src/built-in/unset.c \
-		src/exit_n_free/error_exit.c	src/exit_n_free/free.c \
-		src/inline_code.c	src/data_init.c \
-		src/lexer/parcer.c	src/lexer/str2token.c\
-		src/utils/get_variables.c \
-		src/execute/execute.c \
-		redirection.c \
-		signal.c \
-		utils.c
+# Files
+SRC		= 	main.c \
+			utils.c \
+			utils/init_data.c \
+			utils/exit.c \
+			utils/error.c \
+			utils/cleanup.c \
+			env/env.c \
+			env/env_set.c \
+			lexer/parse_user_input.c \
+			lexer/tokenization.c \
+			lexer/tokenization_utils.c \
+			lexer/check_if_var.c \
+			lexer/lexer_grammar.c \
+			lexer/token_lst_utils.c \
+			lexer/token_lst_utils_2.c \
+			expansion/var_expander.c \
+			expansion/var_expander_utils.c \
+			expansion/identify_var.c \
+			expansion/quotes_handler.c \
+			expansion/quotes_remover.c \
+			expansion/recover_value.c \
+			expansion/replace_var.c \
+			parser/create_commands.c \
+			parser/parse_word.c \
+			parser/fill_args_echo.c \
+			parser/fill_args_echo_utils.c \
+			parser/fill_args_default.c \
+			parser/parse_input.c \
+			parser/parse_trunc.c \
+			parser/parse_append.c \
+			parser/parse_heredoc.c \
+			parser/parse_heredoc_utils.c \
+			parser/parse_pipe.c \
+			parser/cmd_lst_utils.c \
+			parser/cmd_lst_utils_cleanup.c \
+			built-in/export.c \
+			built-in/unset.c \
+			built-in/cd.c \
+			built-in/env.c \
+			built-in/pwd.c \
+			built-in/echo.c \
+			built-in/exit.c \
+			debug.c \
+
+# Build files and directories
+SRC_PATH = ./sources/
+INC_PATH = ./includes/
+
+SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
 # Sources and objects
 OBJS = $(SRCS:.c=.o)
@@ -30,22 +68,23 @@ OBJS = $(SRCS:.c=.o)
 # Constants
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-LIBS = -lreadline -ldl
+CFLAGS = -g #-Wall -Wextra -Werror
+LIBS = -l readline
 RM = rm -f
 
 # Libft settings
-INCLULIBFT = -Ilibft
-LIBFTFLAGS = $(INCLULIBFT) -Llibft -lft
+LIBFT_PATH = ./libft/
+LIBFT = ./libft/libft.a
+INC_LIBFT = -I $(INC_PATH) -I $(LIBFT_PATH)
 
 # Rules
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $< $(INCLULIBFT)
+	$(CC) $(CFLAGS) -c -o $@ $< $(INC_LIBFT)
 
 $(NAME): $(OBJS) libft
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INC_LIBFT) $(LIBFT) $(LIBS)
 
 libft:
 	make -C libft
