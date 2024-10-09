@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 17:09:12 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/03 18:00:02 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/07 01:43:20 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ bool	init_data(t_data *data, char **env)
 	data->token = NULL;
 	data->user_input = NULL;
 	data->cmd = NULL;
-	data->pid = -1;
 	return (true);
 }
 

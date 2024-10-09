@@ -1,5 +1,4 @@
-*/*.o
-*/*.a
-.vscode
-.vscode/
 minishell
+mshell
+libft/ft_printf/ft_printf.a
+libft/libft.a

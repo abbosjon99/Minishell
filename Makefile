@@ -6,7 +6,7 @@
 #    By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/10/03 18:46:23 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/10/03 22:33:06 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC		= 	main.c \
 			built-in/pwd.c \
 			built-in/echo.c \
 			built-in/exit.c \
+			execute/execute.c \
 			debug.c \
 
 # Build files and directories
