@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 21:51:18 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/09 21:57:42 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:41:47 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,21 @@ bool	execute(t_data *data)
 			else if (ft_strcmp(cmd->command, "pwd") == 0)
 			{
 				builtin_pwd(cmd->args, data);
+				exit(0);
+			}
+			else if (ft_strcmp(cmd->command, "cd") == 0)
+			{
+				builtin_cd(cmd->args, data);
+				exit(0);
+			}
+			else if (ft_strcmp(cmd->command, "env") == 0)
+			{
+				builtin_env(cmd->args, data);
+				exit(0);
+			}
+			else if (ft_strcmp(cmd->command, "unset") == 0)
+			{
+				builtin_unset(cmd->args, data);
 				exit(0);
 			}
 			else if (execve(ft_strjoin("/bin/", cmd->command), cmd->args,

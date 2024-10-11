@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 17:14:16 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/09 21:56:41 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:31:05 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@
  ******************************************************************************/
 extern int				g_last_exit_code;
 
-/******************************************************************************
- *								STRUCTS										   *
- ******************************************************************************/
+// /*************************************************************************
+// 								STRUCTS										*
+//  *************************************************************************
 typedef struct s_token
 {
 	char				*str;
@@ -99,9 +99,9 @@ typedef struct s_data
 	t_command			*cmd;
 }						t_data;
 
-/******************************************************************************
- *								ENUMS										   *
- ******************************************************************************/
+// /*************************************************************************
+// *							ENUMS										*
+//  *************************************************************************
 
 enum					e_token_types
 {
@@ -285,7 +285,6 @@ bool					is_valid_env_var_key(char *var);
 
 // env_set.c
 bool					set_env_var(t_data *data, char *key, char *value);
-bool					remove_env_var(t_data *data, int idx);
 
 // builtins
 int						env_builtin(t_data *data, char **args);
@@ -314,8 +313,17 @@ bool					execute(t_data *data);
 /* ------------------------ Built-In ----------------------------------------*/
 // echo.c
 bool					builtin_echo(char **args);
-
-//pwd.c
+// pwd.c
 bool					builtin_pwd(char **args, t_data *data);
+// cd.c
+bool					builtin_cd(char **args, t_data *data);
+// env.c
+bool					builtin_env(char **args, t_data *data);
+
+/*-----------------------UTILS-------------------------*/
+// env_tools.c
+char					*find_env_var(char *key, t_data *data);
+bool					change_env_var(char *key, t_data *data);
+bool					remove_env_var(char *key, t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 17:51:06 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/10/06 14:45:10 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:30:57 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,3 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	return (true);
 }
 
-/* remove_env_var:
-*	Removes the variable at the given index from the
-*	environment variables.
-*
-*	Returns 1 if the removal was successful, 0 if case
-*	of an invalid index or a memory allocation error.
-*/
-bool	remove_env_var(t_data *data, int idx)
-{
-	int	i;
-	int	count;
-
-	if (idx > env_var_count(data->env))
-		return (false);
-	free_ptr(data->env[idx]);
-	i = idx;
-	count = idx;
-	while (data->env[i + 1])
-	{
-		data->env[i] = ft_strdup(data->env[i + 1]);
-		free_ptr(data->env[i + 1]);
-		count++;
-		i++;
-	}
-	data->env = realloc_env_vars(data, count);
-	if (!data->env)
-		return (false);
-	return (true);
-}

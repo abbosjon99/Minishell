@@ -6,7 +6,7 @@
 #    By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/10/03 22:33:06 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/10/10 09:30:04 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC		= 	main.c \
 			utils/exit.c \
 			utils/error.c \
 			utils/cleanup.c \
+			utils/env_tools.c \
 			env/env.c \
 			env/env_set.c \
 			lexer/parse_user_input.c \
