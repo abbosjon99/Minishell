@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 17:14:16 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/10 21:31:05 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:56:18 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,6 +319,8 @@ bool					builtin_pwd(char **args, t_data *data);
 bool					builtin_cd(char **args, t_data *data);
 // env.c
 bool					builtin_env(char **args, t_data *data);
+
+bool					builtin_unset(char **args, t_data *data);
 
 /*-----------------------UTILS-------------------------*/
 // env_tools.c
