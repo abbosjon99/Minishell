@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:20:39 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 17:55:09 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:06:44 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static void	open_infile(t_io_fds *io, char *file, char *original_filename)
 	io->infile = ft_strdup(file);
 	if (io->infile && io->infile[0] == '\0')
 	{
-		errmsg_cmd(original_filename, NULL, "ambiguous redirect", false);
+		cstm_perr(original_filename, NULL, "ambiguous redirect", false);
 		return ;
 	}
 	io->fd_in = open(io->infile, O_RDONLY);
 	if (io->fd_in == -1)
-		errmsg_cmd(io->infile, NULL, strerror(errno), false);
+		cstm_perr(io->infile, NULL, strerror(errno), false);
 }
 
 void	parse_input(t_command **last_cmd, t_token **token_lst)

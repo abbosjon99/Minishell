@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:09:12 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 13:49:05 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:44:22 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // Returns FALSE on failure, TRUE on success.
 static bool	env_init(t_data *data, char **env)
 {
-	int		i;
+	int	i;
 
 	data->env = ft_calloc(env_length(env) + 1, sizeof(data->env));
 	if (!data->env)
@@ -34,11 +34,11 @@ static bool	env_init(t_data *data, char **env)
 }
 
 /* init_wds:
-*	Initializes working directory variables as a safeguard against
-*	environment PWD and OLDPWD being unset or otherwise not present
-*	in the environment. Used for cd builtin.
-*	Returns true if successful, false in case of error.
-*/
+ *	Initializes working directory variables as a safeguard against
+ *	environment PWD and OLDPWD being unset or otherwise not present
+ *	in the environment. Used for cd builtin.
+ *	Returns true if successful, false in case of error.
+ */
 static bool	dir_init(t_data *data)
 {
 	char	buff[PATH_MAX];
@@ -70,15 +70,12 @@ static bool	dir_init(t_data *data)
 //	false - Error
 bool	data_init(t_data *data, char **env)
 {
-	if (!env_init(data, env) || !dir_init(data))
-	{
-		ft_printf("Internal error:\n");
-		if (!env_init(data, env))
-			ft_printf("Initialization of environment values has failed\n");
-		if (!dir_init(data))
-			ft_printf("Initialization working directories has failed\n");
-		return (false);
-	}
+	if (!env_init(data, env))
+		return (cstm_perr("Internal Error", NULL,
+				"Initialization of environment values has failed", 0));
+	if (!dir_init(data))
+		return (cstm_perr("Internal Error", NULL,
+				"Initialization working directories has failed", 0));
 	data->user_input = NULL;
 	data->token = NULL;
 	data->cmd = NULL;
@@ -86,14 +83,14 @@ bool	data_init(t_data *data, char **env)
 }
 
 /* init_io:
-*	Initializes a structure with default values to contain
-*	infile and outfile information for a command.
-*/
+ *	Initializes a structure with default values to contain
+ *	infile and outfile information for a command.
+ */
 void	init_io(t_command *cmd)
 {
 	if (!cmd->io_fds)
 	{
-		cmd->io_fds = malloc(sizeof * cmd->io_fds);
+		cmd->io_fds = malloc(sizeof *cmd->io_fds);
 		if (!cmd->io_fds)
 			return ;
 		cmd->io_fds->infile = NULL;

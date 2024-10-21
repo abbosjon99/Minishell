@@ -6,11 +6,34 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:05:55 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 13:16:07 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:24:29 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// Freeing array of strings and returning returning 0
+int	free_str_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (arr)
+	{
+		while (arr[i])
+		{
+			if (arr[i])
+			{
+				free_ptr(arr[i]);
+				arr[i] = NULL;
+			}
+			i++;
+		}
+		free(arr);
+		arr = NULL;
+	}
+	return (0);
+}
 
 /* free_data:
 *	Frees all of the data used to run a command. If clear_history is true,
@@ -34,40 +57,14 @@ void	free_data(t_data *data, bool clear_history)
 		if (data && data->old_working_dir)
 			free_ptr(data->old_working_dir);
 		if (data && data->env)
-			free_str_tab(data->env);
+			free_str_arr(data->env);
 		rl_clear_history();
 	}
 }
 
 
-/* free_str_tab:
-*	Frees an array of strings.
-*/
-void	free_str_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (tab)
-	{
-		while (tab[i])
-		{
-			if (tab[i])
-			{
-				free_ptr(tab[i]);
-				tab[i] = NULL;
-			}
-			i++;
-		}
-		free(tab);
-		tab = NULL;
-	}
-}
-
-/* free_ptr:
-*	Frees a pointer of any type if it is not NULL and sets it to NULL.
-*	This avoids accidental double-frees.
-*/
+// For freing pointer and setting it to NULL
+// WHY: to avoid double freeing
 void	free_ptr(void *ptr)
 {
 	if (ptr != NULL)

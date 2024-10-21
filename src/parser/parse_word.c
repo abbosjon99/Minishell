@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:21:47 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 17:56:39 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:17:12 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	split_var_cmd_token(t_command *last_cmd, char *cmd_str)
 		lst_new_token(NULL, NULL, END, DEFAULT));
 	fill_args(&new_tokens, last_cmd);
 	lstclear_token(&tmp, &free_ptr);
-	free_str_tab(strs);
+	free_str_arr(strs);
 }
 
 void	parse_word(t_command **cmd, t_token **token_lst)

@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 12:55:20 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:17:12 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	minishell_noninteractive(t_data *data, char *arg)
 		i++;
 		free_data(data, false);
 	}
-	free_str_tab(user_inputs);
+	free_str_arr(user_inputs);
 }
 
 //	main:

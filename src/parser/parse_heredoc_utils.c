@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_heredoc_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:09:37 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:01:04 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:17:12 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*make_str_from_tab(char **tab)
 			free_ptr(tmp);
 		}
 	}
-	free_str_tab(tab);
+	free_str_arr(tab);
 	return (str);
 }
 
@@ -85,7 +85,7 @@ static bool	evaluate_heredoc_line(t_data *data, char **line,
 {
 	if (*line == NULL)
 	{
-		errmsg_cmd("warning", "here-document delimited by end-of-file: wanted",
+		cstm_perr("warning", "here-document delimited by end-of-file: wanted",
 			io->heredoc_delimiter, true);
 		*ret = true;
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 14:05:08 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:23:29 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,12 @@ char		*get_env_var_value(char **env, char *var);
 bool		is_valid_env_var_key(char *var);
 
 // env_tools
-char		*find_env_var(char *key, t_data *data);
+char		*get_env_var(char *key, t_data *data);
 bool		change_env_var(char *key, t_data *data);
 bool		remove_env_var(char *key, t_data *data);
 
 // env_set
 bool		set_env_var(t_data *data, char *key, char *value);
-
 
 // ----------------------------------------------------------------------------
 //								LEXER
@@ -121,7 +120,7 @@ char		*get_new_token_string(char *oldstr, char *var_value,
 
 // quotes_handler
 int			handle_quotes(t_data *data);
-bool		quotes_in_string(char *str);																	
+bool		quotes_in_string(char *str);
 int			count_len(char *str, int count, int i);
 
 // quotes_remover
@@ -190,15 +189,12 @@ char		*get_cmd_path(t_data *data, char *cmd);
 // heredoc
 bool		get_heredoc(t_data *data, t_io_fds *io);
 
-
 // ----------------------------------------------------------------------------
 //								EXECUTION
 // ----------------------------------------------------------------------------
 
 //																		execute
 bool		execute(t_data *data);
-
-
 
 // ----------------------------------------------------------------------------
 //								BUILT-IN
@@ -219,15 +215,14 @@ bool		builtin_export(char **args, t_data *data);
 void		exit_shell(t_data *data, int exno);
 
 //	error
-int			errmsg_cmd(char *command, char *detail, char *error_message,
-				int error_nb);
+int			cstm_perr(char *command, char *detail, char *error_message,
+				int ret_val);
 void		errmsg(char *errmsg, char *detail, int quotes);
 
 //	cleanup
 void		free_data(t_data *data, bool clear_history);
 void		free_ptr(void *ptr);
-void		free_str_tab(char **tab);
-
+int			free_str_arr(char **arr);
 
 // ----------------------------------------------------------------------------
 //								DEBUG
@@ -236,6 +231,5 @@ void		free_str_tab(char **tab);
 // debug
 void		print_cmd_list(t_data *data);
 void		print_token_list(t_token **tokens);
-
 
 #endif

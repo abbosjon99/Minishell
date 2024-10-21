@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:47:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 15:58:35 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:56:00 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	env_length(char **env)
 }
 
 // finds and returns the env value
-char	*find_env_var(char *key, t_data *data)
+char	*get_env_var(char *key, t_data *data)
 {
 	char	**env;
 	int		i;
@@ -54,17 +54,25 @@ char	*find_env_var(char *key, t_data *data)
 bool	change_env_var(char *key, t_data *data)
 {
 	char	*target;
+	char	**env;
 
 	if (!key || !data->env)
 		return (false);
-	target = find_env_var(key, data);
+	env = data->env;
+	target = get_env_var(key, data);
 	if (target)
 	{
-		free(target);
-		target = ft_strdup(key);
-		if (target)
+		while (*env != target)
+			env++;
+		free_ptr(target);
+		*env = ft_strdup(key);
+		if (*env)
+		{
+			env = NULL;
 			return (true);
+		}
 	}
+	env = NULL;
 	return (false);
 }
 
@@ -77,7 +85,7 @@ bool	remove_env_var(char *key, t_data *data)
 	i = 0;
 	if (!key || !data->env)
 		return (false);
-	buffer = find_env_var(key, data);
+	buffer = get_env_var(key, data);
 	if (buffer)
 	{
 		while (data->env[i] != buffer)
