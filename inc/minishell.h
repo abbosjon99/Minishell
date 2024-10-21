@@ -1,0 +1,228 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/10/20 17:40:40 by akeldiya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include "../libs/libft/libft.h"
+# include "./definitions.h"
+# include <errno.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdbool.h>
+# include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
+
+/******************************************************************************
+
+*							GLOBAL VARIABLE										*
+ ******************************************************************************/
+extern int	g_last_exit_code;
+
+/******************************************************************************
+
+*								FUNCTIONS										*
+ ******************************************************************************/
+
+/* ------------------------ INITIALIZATION ----------------------------------*/
+// init_data.c
+bool		init_data(t_data *data, char **env);
+void		init_io(t_command *cmd);
+
+// UTils
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_isspace(int c);
+
+/* ------------------------ ERROR & EXIT HANDLING ---------------------------*/
+// exit.c
+void		exit_shell(t_data *data, int exno);
+
+// error.c
+int			errmsg_cmd(char *command, char *detail, char *error_message,
+				int error_nb);
+void		errmsg(char *errmsg, char *detail, int quotes);
+bool		usage_message(bool return_val);
+
+// cleanup.c
+void		free_data(t_data *data, bool clear_history);
+void		free_ptr(void *ptr);
+void		free_str_tab(char **tab);
+
+/* ------------------------ LEXER -----------------------------------------*/
+// parse_user_input.c
+bool		parse_user_input(t_data *data);
+
+// tokenization.c
+int			tokenization(t_data *data, char *str);
+
+// tokenization_utils.c
+int			save_word_or_sep(int *i, char *str, int start, t_data *data);
+int			set_status(int status, char *str, int i);
+int			is_separator(char *str, int i);
+int			save_word(t_token **token_lst, char *str, int index, int start);
+int			save_separator(t_token **token_lst, char *str, int index, int type);
+
+// lexer_grammar.c
+int			check_consecutives(t_token **token_lst);
+
+// check_if_var.c
+int			check_if_var(t_token **token_lst);
+
+// token_lst_utils.c
+t_token		*lst_new_token(char *str, char *str_backup, int type, int status);
+void		lst_add_back_token(t_token **alst, t_token *new_node);
+void		lstdelone_token(t_token *lst, void (*del)(void *));
+void		lstclear_token(t_token **lst, void (*del)(void *));
+t_token		*insert_lst_between(t_token **head, t_token *to_del,
+				t_token *insert);
+
+/* ------------------------ EXPANSION ---------------------------------------*/
+// var_expander.c
+int			var_expander(t_data *data, t_token **token_lst);
+
+// recover_value.c
+char		*recover_val(t_token *token, char *str, t_data *data);
+
+// identify_var.c
+char		*identify_var(char *str);
+int			var_length(char *str);
+bool		is_var_compliant(char c);
+
+// replace_var.c
+int			replace_var(t_token **token_node, char *var_value, int index);
+void		copy_var_value(char *new_str, char *var_value, int *j);
+char		*var_expander_heredoc(t_data *data, char *str);
+char		*replace_str_heredoc(char *str, char *var_value, int index);
+
+// var_expander_utils.c
+void		copy_var_value(char *new_str, char *var_value, int *j);
+char		*get_new_token_string(char *oldstr, char *var_value,
+				int newstr_size, int index);
+
+// quotes_handler.c
+int			handle_quotes(t_data *data);
+bool		quotes_in_string(char *str);
+int			count_len(char *str, int count, int i);
+
+// quotes_remover.c
+int			remove_quotes(t_token **token_node);
+
+/* ------------------------ PARSER ---------------------------------------*/
+
+// create_command.c
+void		create_commands(t_data *data, t_token *token);
+
+// parse_command.c
+void		parse_word(t_command **cmd, t_token **token_lst);
+
+// fill_args_default.c
+int			fill_args(t_token **token_node, t_command *last_cmd);
+int			add_args_default_mode(t_token **token_node, t_command *last_cmd);
+int			create_args_default_mode(t_token **token_node, t_command *last_cmd);
+
+// fill_args_echo_mode.c
+int			add_args_echo_mode(t_token **token_node, t_command *last_cmd);
+int			create_args_echo_mode(t_token **token_node, t_command *last_cmd);
+
+// fill_args_echo_utils.c
+char		*join_vars(t_token **token_node);
+int			count_args(t_token *temp);
+char		**copy_in_new_tab(int len, char **new_tab, t_command *last_cmd,
+				t_token *tmp);
+void		remove_empty_var_args(t_token **tokens);
+
+// cmd_lst_utils.c
+t_command	*lst_new_cmd(bool value);
+void		lst_add_back_cmd(t_command **alst, t_command *new_node);
+t_command	*lst_last_cmd(t_command *cmd);
+t_command	*lst_first_cmd(t_command *cmd);
+
+// cmd_lst_utils_cleanup.c
+void		lst_delone_cmd(t_command *lst, void (*del)(void *));
+void		lst_clear_cmd(t_command **lst, void (*del)(void *));
+
+// parse_trunc.c
+void		parse_trunc(t_command **last_cmd, t_token **token_lst);
+char		*get_relative_path(char *file_to_open);
+
+// parse_input.c
+bool		remove_old_file_ref(t_io_fds *io, bool infile);
+void		parse_input(t_command **last_cmd, t_token **token_lst);
+
+// parse_append.c
+void		parse_append(t_command **last_cmd, t_token **token_lst);
+
+// parse_heredoc.c
+void		parse_heredoc(t_data *data, t_command **last_cmd,
+				t_token **token_lst);
+
+// parse_heredoc_utils.c
+bool		fill_heredoc(t_data *data, t_io_fds *io, int fd);
+
+// parse_pipec
+void		parse_pipe(t_command **cmd, t_token **token_lst);
+
+/* ------------------------ EXECUTION ---------------------------------------*/
+// env.c
+int			env_var_count(char **env);
+int			get_env_var_index(char **env, char *var);
+char		*get_env_var_value(char **env, char *var);
+bool		is_valid_env_var_key(char *var);
+
+// env_set.c
+bool		set_env_var(t_data *data, char *key, char *value);
+
+// parse_path.c
+char		*get_cmd_path(t_data *data, char *cmd);
+
+// heredoc.c
+bool		get_heredoc(t_data *data, t_io_fds *io);
+
+/* ------------------------ DEBUG -------------------------------------------*/
+// debug.c
+void		print_cmd_list(t_data *data);
+void		print_token_list(t_token **tokens);
+
+// ABBOS'S PART
+// execute.c
+bool		execute(t_data *data);
+
+/* ------------------------ Built-In ----------------------------------------*/
+// echo.c
+bool		builtin_echo(char **args);
+// pwd.c
+bool		builtin_pwd(char **args, t_data *data);
+// cd.c
+bool		builtin_cd(char **args, t_data *data);
+// env.c
+bool		builtin_env(char **args, t_data *data);
+
+bool		builtin_unset(char **args, t_data *data);
+
+bool		builtin_export(char **args, t_data *data);
+
+/*-----------------------UTILS-------------------------*/
+// env_tools.c
+char		*find_env_var(char *key, t_data *data);
+bool		change_env_var(char *key, t_data *data);
+bool		remove_env_var(char *key, t_data *data);
+
+#endif
