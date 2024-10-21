@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:34:07 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 18:14:31 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:29:49 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*cd_pathes(char *path, t_data *data)
 		return (NULL);
 	if (*path == '/')
 		return (ft_strdup(path));
-	temp = ft_strjoin(get_env_var("PWD", data) + 4, "/");
+	temp = ft_strjoin(get_curr_path(), "/");
 	fixed_path = ft_strjoin(temp, path);
 	free_ptr(temp);
 	return (fixed_path);
@@ -32,6 +32,9 @@ static char	*cd_pathes(char *path, t_data *data)
 // tries to access and change OLDPWD and PWD
 static bool	cd_helper(char *path, t_data *data)
 {
+	char	*oldpwd;
+
+	oldpwd = get_curr_path();
 	path = cd_pathes(path, data);
 	if (!path)
 		return (false);
@@ -44,11 +47,11 @@ static bool	cd_helper(char *path, t_data *data)
 		free_ptr(path);
 		return (false);
 	}
-	if (!change_env_var(ft_strjoin("OLD", get_env_var("PWD", data)), data))
+	free_ptr(path);
+	if (!add_rem_env(ft_strjoin("OLDPWD=", oldpwd), data))
 		return (false);
-	if (!change_env_var(ft_strjoin("PWD=", path), data))
+	if (!add_rem_env(ft_strjoin("PWD=", get_curr_path()), data))
 		return (false);
-	free(path);
 	return (true);
 }
 
@@ -62,7 +65,12 @@ bool	builtin_cd(char **args, t_data *data)
 		return (false);
 	args++;
 	if (!*args)
-		return (cd_helper(get_env_var("HOME", data) + 5, data));
+	{
+		if (get_env_var("HOME", data))
+			return (cd_helper(get_env_var("HOME", data) + 5, data));
+		else
+			return (true);
+	}
 	else if (*args && args[1])
 	{
 		printf("cd: too many arguments\n");

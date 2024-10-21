@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:34:07 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 17:23:35 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:22:50 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ static bool	export_adder(char *str, t_data *data)
 	return (true);
 }
 
+// addes or replaces variable in env
+bool	add_rem_env(char *var, t_data *data)
+{
+	if (get_env_var(var, data))
+	{
+		if (!change_env_var(var, data))
+			return (false);
+	}
+	else
+		return (export_adder(var, data));
+}
+
 bool	builtin_export(char **args, t_data *data)
 {
 	char	**temp;
@@ -47,15 +59,11 @@ bool	builtin_export(char **args, t_data *data)
 	if (!**args || !*args || ft_strcmp(*args, "export") != 0)
 		return (false);
 	args++;
+	if (!*args)
+		return (builtin_env(data));
 	while (*args)
 	{
-		if (get_env_var(*args, data))
-		{
-			if (!change_env_var(*args, data))
-				return (false);
-		}
-		else
-			return (export_adder(*args, data));
+		add_rem_env(*args, data);
 		args++;
 	}
 	return (true);

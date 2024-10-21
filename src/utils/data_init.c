@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:09:12 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 17:44:22 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:09:26 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,6 @@ static bool	env_init(t_data *data, char **env)
 	return (true);
 }
 
-/* init_wds:
- *	Initializes working directory variables as a safeguard against
- *	environment PWD and OLDPWD being unset or otherwise not present
- *	in the environment. Used for cd builtin.
- *	Returns true if successful, false in case of error.
- */
-static bool	dir_init(t_data *data)
-{
-	char	buff[PATH_MAX];
-	char	*wd;
-
-	wd = getcwd(buff, PATH_MAX);
-	data->working_dir = ft_strdup(wd);
-	if (!data->working_dir)
-		return (false);
-	if (get_env_var_index(data->env, "OLDPWD") != -1)
-	{
-		data->old_working_dir = ft_strdup(get_env_var_value(data->env,
-					"OLDPWD"));
-		if (!data->old_working_dir)
-			return (false);
-	}
-	else
-	{
-		data->old_working_dir = ft_strdup(wd);
-		if (!data->old_working_dir)
-			return (false);
-	}
-	return (true);
-}
-
 //	Copies env file from host to itself, so we can use it for parsing
 //	and for execution
 //	true - if everything is OK
@@ -73,9 +42,6 @@ bool	data_init(t_data *data, char **env)
 	if (!env_init(data, env))
 		return (cstm_perr("Internal Error", NULL,
 				"Initialization of environment values has failed", 0));
-	if (!dir_init(data))
-		return (cstm_perr("Internal Error", NULL,
-				"Initialization working directories has failed", 0));
 	data->user_input = NULL;
 	data->token = NULL;
 	data->cmd = NULL;

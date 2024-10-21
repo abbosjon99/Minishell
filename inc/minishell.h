@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 17:23:29 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:22:49 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,9 +203,11 @@ bool		execute(t_data *data);
 bool		builtin_echo(char **args);
 bool		builtin_pwd(char **args, t_data *data);
 bool		builtin_cd(char **args, t_data *data);
-bool		builtin_env(char **args, t_data *data);
+bool		builtin_env(t_data *data);
 bool		builtin_unset(char **args, t_data *data);
 bool		builtin_export(char **args, t_data *data);
+bool		add_rem_env(char *var, t_data *data);
+char		*get_curr_path(void);
 
 // ----------------------------------------------------------------------------
 //								ERROR and EXIT

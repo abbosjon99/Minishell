@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 17:17:12 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:24:38 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	minishell_interactive(t_data *data)
 		data->user_input = readline(PROMPT);
 		if (parse_user_input(data) == true)
 			execute(data);
-		// print_all_data(data);
+		//print_all_data(data);
 		free_data(data, false);
 	}
 }

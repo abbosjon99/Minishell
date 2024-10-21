@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:05:55 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 17:24:29 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:09:51 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ void	free_data(t_data *data, bool clear_history)
 		lst_clear_cmd(&data->cmd, &free_ptr);
 	if (clear_history == true)
 	{
-		if (data && data->working_dir)
-			free_ptr(data->working_dir);
-		if (data && data->old_working_dir)
-			free_ptr(data->old_working_dir);
 		if (data && data->env)
 			free_str_arr(data->env);
 		rl_clear_history();

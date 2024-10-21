@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 21:51:18 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 11:15:05 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 19:05:39 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@
 
 bool	is_builtin_env(char *command)
 {
-	return (!ft_strcmp(command, "cd") || !ft_strcmp(command, "env")
+	return (!ft_strcmp(command, "cd")
 		|| !ft_strcmp(command, "unset") || !ft_strcmp(command, "export"));
 }
 
@@ -134,7 +134,7 @@ static bool	builtin_func(t_command *cmd, t_data *data)
 	else if (ft_strcmp(cmd->command, "cd") == 0)
 		builtin_cd(cmd->args, data);
 	else if (ft_strcmp(cmd->command, "env") == 0)
-		builtin_env(cmd->args, data);
+		builtin_env(data);
 	else if (ft_strcmp(cmd->command, "unset") == 0)
 		builtin_unset(cmd->args, data);
 	else if (ft_strcmp(cmd->command, "export") == 0)
