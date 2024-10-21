@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:51:06 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:07:56 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:37:21 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 /* realloc_env_vars:
 *	Reallocates memory for the global variable g_env_vars.
@@ -64,7 +65,7 @@ bool	set_env_var(t_data *data, char *key, char *value)
 	}
 	else
 	{
-		idx = env_var_count(data->env);
+		idx = env_length(data->env);
 		data->env = realloc_env_vars(data, idx + 1);
 		if (!data->env)
 			return (false);

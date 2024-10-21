@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:50:51 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:08:07 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:32:27 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* env_var_count:
-*	Counts how many original environment variables there are.
-*	Returns the number of environment variables.
-*/
-int	env_var_count(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env && env[i])
-		i++;
-	return (i);
-}
 
 /* get_env_var_index:
 *	Searches for the given variable in the environment variables.

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 17:09:12 by mcombeau          #+#    #+#             */
-/*   Updated: 2024/10/21 11:20:15 by akeldiya         ###   ########.fr       */
+/*   Created: 2024/09/17 17:09:12 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/10/21 13:49:05 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* init_env:
-*	Initializes a data variable with the contents of the environment
-*	variables inherited from the original shell.
-*	Returns 0 on failure, 1 on success.
-*/
-static bool	init_env(t_data *data, char **env)
+// Initializes a data variable with the contents of the environment
+// variables inherited from the original shell.
+// Returns FALSE on failure, TRUE on success.
+static bool	env_init(t_data *data, char **env)
 {
 	int		i;
 
-	data->env = ft_calloc(env_var_count(env) + 1, sizeof * data->env);
+	data->env = ft_calloc(env_length(env) + 1, sizeof(data->env));
 	if (!data->env)
 		return (false);
 	i = 0;
@@ -41,7 +39,7 @@ static bool	init_env(t_data *data, char **env)
 *	in the environment. Used for cd builtin.
 *	Returns true if successful, false in case of error.
 */
-static bool	init_wds(t_data *data)
+static bool	dir_init(t_data *data)
 {
 	char	buff[PATH_MAX];
 	char	*wd;
@@ -66,25 +64,23 @@ static bool	init_wds(t_data *data)
 	return (true);
 }
 
-/* init_data:
-*	Initializes the data structure used in parsing and executing user input.
-*	Returns true if successful, false in case of error.
-*/
-bool	init_data(t_data *data, char **env)
+//	Copies env file from host to itself, so we can use it for parsing
+//	and for execution
+//	true - if everything is OK
+//	false - Error
+bool	data_init(t_data *data, char **env)
 {
-	if (!init_env(data, env))
+	if (!env_init(data, env) || !dir_init(data))
 	{
-		errmsg_cmd("Fatal", NULL, "Could not initialize environment", 1);
+		ft_printf("Internal error:\n");
+		if (!env_init(data, env))
+			ft_printf("Initialization of environment values has failed\n");
+		if (!dir_init(data))
+			ft_printf("Initialization working directories has failed\n");
 		return (false);
 	}
-	if (!init_wds(data))
-	{
-		errmsg_cmd("Fatal", NULL, "Could not initialize working directories",
-			1);
-		return (false);
-	}
-	data->token = NULL;
 	data->user_input = NULL;
+	data->token = NULL;
 	data->cmd = NULL;
 	return (true);
 }

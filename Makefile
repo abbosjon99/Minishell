@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+         #
+#    By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/10/20 17:41:52 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/10/21 13:38:33 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 SRC	= 	minishell.c \
 		env/env.c \
 		env/env_set.c \
+		env/env_tools.c \
 		lexer/parse_user_input.c \
 		lexer/tokenization.c \
 		lexer/tokenization_utils.c \
@@ -41,20 +42,19 @@ SRC	= 	minishell.c \
 		expander/quotes_remover.c \
 		expander/recover_value.c \
 		expander/replace_var.c \
-		built-in/export.c \
-		built-in/unset.c \
-		built-in/cd.c \
-		built-in/env.c \
-		built-in/pwd.c \
-		built-in/echo.c \
-		built-in/exit.c \
+		builtin/export.c \
+		builtin/unset.c \
+		builtin/cd.c \
+		builtin/env.c \
+		builtin/pwd.c \
+		builtin/echo.c \
+		builtin/exit.c \
 		execute/execute.c \
 		utils.c \
-		utils/init_data.c \
+		utils/data_init.c \
 		utils/exit.c \
-		utils/error.c \
+		utils/errors.c \
 		utils/cleanup.c \
-		utils/env_tools.c \
 		debug.c \
 
 # Paths to add prefix

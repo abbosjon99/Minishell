@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   env_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:47:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/20 13:36:03 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:58:35 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// finds and returns the env
+//	counts and returns the length of env char array
+int	env_length(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env && env[i])
+		i++;
+	return (i);
+}
+
+// finds and returns the env value
 char	*find_env_var(char *key, t_data *data)
 {
 	char	**env;

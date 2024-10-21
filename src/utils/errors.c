@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 19:06:15 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/05 12:35:50 by mcombeau         ###   ########.fr       */
+/*   Created: 2024/09/17 19:06:15 by akeldiya          #+#    #+#             */
+/*   Updated: 2024/10/21 13:15:47 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,4 @@ void	errmsg(char *errmsg, char *detail, int quotes)
 		msg = join_strs(msg, "'");
 	ft_putendl_fd(msg, STDERR_FILENO);
 	free_ptr(msg);
-}
-
-/* usage_message:
-*	Prints a usage message. Used if start-up arguments are invalid.
-*/
-bool	usage_message(bool return_val)
-{
-	ft_putendl_fd("Usage: ./minishell", 2);
-	ft_putendl_fd("Usage: ./minishell -c \"input line\"", 2);
-	return (return_val);
 }

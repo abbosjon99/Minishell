@@ -3,35 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/20 20:58:29 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:55:20 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* start_check:
-*	Checks the arguments at program start up. Minishell can start either:
-*		* when no arguments are supplied.
-*		* when the -c option is supplied followed by one argument.
-*	Returns true if minishell can begin, false with a usage message if not.
-*/
-static bool	start_check(t_data *data, int ac, char **av)
+//	Initial checking the arguments:
+//	-if any error prints error
+//	-if -c command is here it will redirect everything to inline mode
+static bool	argv_check(t_data *data, int argc, char **argv)
 {
-	if (ac != 1 && ac != 3)
-		return (usage_message(false));
-	if (ac == 3)
+	data->is_intrctv = true;
+	if (argc > 1)
 	{
-		data->interactive = false;
-		if (!av[1] || (av[1] && ft_strcmp(av[1], "-c") != 0))
-			return (usage_message(false));
-		else if (!av[2] || (av[2] && av[2][0] == '\0'))
-			return (usage_message(false));
+		data->is_intrctv = false;
+		if (ft_strncmp(argv[1], "-c", 3))
+			return (ft_printf("Usage: ./minishell -c \"Commands here\"\n")
+				&& false);
+		else if (argc == 2)
+			return (ft_printf("minishell: -c: Option requires an argument\n")
+				&& false);
 	}
-	else
-		data->interactive = true;
 	return (true);
 }
 
@@ -42,9 +38,9 @@ static void	print_all_data(t_data *data)
 }
 
 /* minishell_interactive:
-*	Runs parsing and execution in interactive mode, i.e. when minishell
-*	is started without arguments and provides a prompt for user input.
-*/
+ *	Runs parsing and execution in interactive mode, i.e. when minishell
+ *	is started without arguments and provides a prompt for user input.
+ */
 void	minishell_interactive(t_data *data)
 {
 	while (1)
@@ -58,16 +54,16 @@ void	minishell_interactive(t_data *data)
 }
 
 /* minishell_noninteractive:
-*	Runs parsing and execution in noninteractive mode, i.e. when
-*	minishell is started with the -c option followed by an argument
-*	containing the commands to be executed:
-*		./minishell -c "echo hello | wc -c"
-*	Commands in this mode can be separated by a semicolon, ';' to
-*	indicate sequential execution:
-*		./minishell -c "echo hello; ls"
-*	-> echo hello is the first command run
-*	-> ls is the second
-*/
+ *	Runs parsing and execution in noninteractive mode, i.e. when
+ *	minishell is started with the -c option followed by an argument
+ *	containing the commands to be executed:
+ *		./minishell -c "echo hello | wc -c"
+ *	Commands in this mode can be separated by a semicolon, ';' to
+ *	indicate sequential execution:
+ *		./minishell -c "echo hello; ls"
+ *	-> echo hello is the first command run
+ *	-> ls is the second
+ */
 void	minishell_noninteractive(t_data *data, char *arg)
 {
 	char	**user_inputs;
@@ -84,28 +80,29 @@ void	minishell_noninteractive(t_data *data, char *arg)
 			execute(data);
 		else
 			ft_printf("Internal Error !!");
+		print_all_data(data);
 		i++;
 		free_data(data, false);
 	}
 	free_str_tab(user_inputs);
 }
 
-/* main:
-*	Begins minishell. Checks input and determines if
-*	minishell should be run interactively or not.
-*	Exits the shell with the exit status or the last command.
-*/
-int	main(int ac, char **av, char **env)
+//	main:
+//	-checks arguments
+//	-initializes all data
+//	-runs the program on interactive or non-interactive
+//	-exits with cleaning
+int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 
 	ft_memset(&data, 0, sizeof(t_data));
-	if (!start_check(&data, ac, av) || !init_data(&data, env))
+	if (!argv_check(&data, argc, argv) || !data_init(&data, env))
 		exit_shell(NULL, EXIT_FAILURE);
-	if (data.interactive)
+	if (data.is_intrctv)
 		minishell_interactive(&data);
 	else
-		minishell_noninteractive(&data, av[2]);
+		minishell_noninteractive(&data, argv[2]);
 	exit_shell(&data, 0);
 	return (0);
 }

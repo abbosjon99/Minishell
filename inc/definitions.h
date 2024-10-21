@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 23:52:52 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 11:19:07 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:05:27 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define DEFINITIONS_H
 
 # include <stdbool.h>
+
+// ----------------------------------------------------------------------------
+//								GLOBAL VARIABLE	
+// ----------------------------------------------------------------------------
+
+extern int	g_exit_code;
 
 // ----------------------------------------------------------------------------
 //								STRUCTURES
@@ -54,7 +60,7 @@ typedef struct s_command
 
 typedef struct s_data
 {
-	bool				interactive;
+	bool				is_intrctv;
 	t_token				*token;
 	char				*user_input;
 	char				**env;

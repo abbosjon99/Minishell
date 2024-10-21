@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:34:07 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 11:19:30 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:49:03 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static bool	export_adder(char *str, t_data *data)
 	char	**dest;
 	char	**src;
 
-	new_env = (char **)malloc(sizeof(char *) * (env_var_count(data->env) + 2));
+	new_env = ft_calloc(env_length(data->env) + 2, sizeof(data->env));
 	if (!new_env)
 		return (false);
 	dest = new_env;
@@ -50,8 +50,7 @@ static bool	export_adder(char *str, t_data *data)
 	*dest = ft_strdup(str);
 	if (!*dest)
 		return (error_clean(new_env));
-	dest++;
-	*dest = NULL;
+	dest[1] = NULL;
 	error_clean(data->env);
 	data->env = new_env;
 	return (true);
