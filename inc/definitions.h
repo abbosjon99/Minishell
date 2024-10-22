@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 23:52:52 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 20:54:48 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:16:12 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_command
 
 typedef struct s_data
 {
-	bool				is_intrctv;
 	t_token				*token;
 	char				*rl_input;
 	char				**env;

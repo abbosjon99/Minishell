@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/22 09:34:58 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:19:20 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ bool		builtin_export(char **args, t_data *data);
 // ----------------------------------------------------------------------------
 
 //	exit
-void		exit_shell(t_data *data, int exno);
+void		free_exit(t_data *data, int exno);
 
 //	error
 int			perr_cstm(char *command, char *detail, char *error_message,

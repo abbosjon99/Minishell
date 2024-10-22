@@ -6,7 +6,7 @@
 #    By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/28 19:56:58 by akeldiya          #+#    #+#              #
-#    Updated: 2024/10/22 09:33:14 by akeldiya         ###   ########.fr        #
+#    Updated: 2024/10/22 16:15:19 by akeldiya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +49,11 @@ SRC	= 	minishell.c \
 		builtin/echo.c \
 		builtin/exit.c \
 		execute/execute.c \
+		utils/data_init.c \
 		utils/utils.c \
 		utils/free.c \
 		utils/exit.c \
 		utils/errors.c \
-		utils/cleanup.c \
 		debug.c \
 
 # Paths to add prefix
