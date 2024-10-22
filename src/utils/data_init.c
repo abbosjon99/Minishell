@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:09:12 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:09:26 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:07:17 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ static bool	env_init(t_data *data, char **env)
 //	false - Error
 bool	data_init(t_data *data, char **env)
 {
+	g_exit_code = 0;
 	if (!env_init(data, env))
-		return (cstm_perr("Internal Error", NULL,
+		return (perr_cstm("Internal Error", NULL,
 				"Initialization of environment values has failed", 0));
-	data->user_input = NULL;
+	data->rl_input = NULL;
 	data->token = NULL;
 	data->cmd = NULL;
 	return (true);
@@ -56,7 +57,7 @@ void	init_io(t_command *cmd)
 {
 	if (!cmd->io_fds)
 	{
-		cmd->io_fds = malloc(sizeof *cmd->io_fds);
+		cmd->io_fds = malloc(sizeof(cmd->io_fds));
 		if (!cmd->io_fds)
 			return ;
 		cmd->io_fds->infile = NULL;

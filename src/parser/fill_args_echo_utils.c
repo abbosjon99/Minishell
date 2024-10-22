@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:10:11 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:00:08 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:22 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ char	*join_vars(t_token **token_node)
 
 	temp = *token_node;
 	str = ft_strdup(temp->str);
-	while (temp->type == VAR && temp->next->type == VAR
-		&& temp->next->join == true)
+	while (temp->type == VAR && temp->nxt->type == VAR
+		&& temp->nxt->join == true)
 	{
-		str = ft_strjoin(str, temp->next->str);
-		temp = temp->next;
+		str = ft_strjoin(str, temp->nxt->str);
+		temp = temp->nxt;
 	}
 	*token_node = temp;
 	return (str);
@@ -59,13 +59,13 @@ int	count_args(t_token *temp)
 		if (temp->type == VAR && temp->join == true)
 		{
 			while (temp->type == VAR && temp->join == true)
-				temp = temp->next;
+				temp = temp->nxt;
 			i++;
 		}
 		else
 		{
 			i++;
-			temp = temp->next;
+			temp = temp->nxt;
 		}
 	}
 	return (i);
@@ -89,7 +89,7 @@ char	**copy_in_new_tab(int len, char **new_tab,
 		else
 			new_tab[i] = ft_strdup(tmp->str);
 		i++;
-		tmp = tmp->next;
+		tmp = tmp->nxt;
 	}
 	new_tab[i] = NULL;
 	return (new_tab);
@@ -116,12 +116,12 @@ void	remove_empty_var_args(t_token **tokens)
 		if (temp->type == VAR && temp->str[0] == '\0'
 			&& temp->var_exists == false)
 		{
-			temp = temp->next;
-			if (temp == (*tokens)->next)
-				(*tokens) = (*tokens)->next;
-			lstdelone_token(temp->prev, free_ptr);
+			temp = temp->nxt;
+			if (temp == (*tokens)->nxt)
+				(*tokens) = (*tokens)->nxt;
+			lstdelone_token(temp->prv, free_ptr);
 		}
 		else
-			temp = temp->next;
+			temp = temp->nxt;
 	}
 }

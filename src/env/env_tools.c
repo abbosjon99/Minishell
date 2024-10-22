@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   env_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:47:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 18:31:21 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:38:31 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//	counts and returns the length of env char array
-int	env_length(char **env)
+// finds and returns the entire env value
+// which is after = sign
+char	*get_env_val(char *key, t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (env && env[i])
-		i++;
-	return (i);
+	if (!key)
+		return (NULL);
+	return (ft_strchr(get_env_var(key, data), '=') + 1);
+	return (NULL);
 }
 
-// finds and returns the env value
+// finds and returns the entire env variable
 char	*get_env_var(char *key, t_data *data)
 {
 	char	**env;
@@ -50,54 +49,32 @@ char	*get_env_var(char *key, t_data *data)
 	return (NULL);
 }
 
-// finds and changes the env var
-bool	change_env_var(char *key, t_data *data)
+// checks if entering key is valid
+// if yes returns true
+bool	is_valid_env_key(char *key)
 {
-	char	*target;
-	char	**env;
-
-	if (!key || !data->env)
-		return (false);
-	env = data->env;
-	target = get_env_var(key, data);
-	if (target)
-	{
-		while (*env != target)
-			env++;
-		free_ptr(target);
-		*env = ft_strdup(key);
-		if (*env)
-		{
-			env = NULL;
-			return (true);
-		}
-	}
-	env = NULL;
-	return (false);
-}
-
-// remove the env var
-bool	remove_env_var(char *key, t_data *data)
-{
-	char	*buffer;
-	int		i;
+	int	i;
 
 	i = 0;
-	if (!key || !data->env)
+	if (ft_isalpha(key[i]) == 0 && key[i] != '_')
 		return (false);
-	buffer = get_env_var(key, data);
-	if (buffer)
+	i++;
+	while (key[i] && key[i] != '=')
 	{
-		while (data->env[i] != buffer)
-			i++;
-		free(data->env[i]);
-		data->env[i] = data->env[i + 1];
-		while (data->env[i + 1])
-		{
-			data->env[i] = data->env[i + 1];
-			i++;
-		}
-		data->env[i] = NULL;
+		if (ft_isalnum(key[i]) == 0 && key[i] != '_')
+			return (false);
+		i++;
 	}
 	return (true);
+}
+
+//	counts and returns the length of env char array
+int	env_length(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env && env[i])
+		i++;
+	return (i);
 }

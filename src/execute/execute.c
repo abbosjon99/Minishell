@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 21:51:18 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:05:39 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:08:59 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 // 	while (cmd)
 // 	{
 // 		// Create a pipe if there's a next command
-// 		if (cmd->next && pipe(pipe_fd) == -1)
+// 		if (cmd->nxt && pipe(pipe_fd) == -1)
 // 		{
 // 			perror("pipe");
 // 			return (false);
@@ -77,7 +77,7 @@
 // 					dup2(cmd->io_fds->fd_out, STDOUT_FILENO);
 // 					close(cmd->io_fds->fd_out);
 // 				}
-// 				else if (cmd->next)
+// 				else if (cmd->nxt)
 // 				{
 // 					close(pipe_fd[0]);
 // 					dup2(pipe_fd[1], STDOUT_FILENO);
@@ -99,11 +99,11 @@
 // 			{
 // 				if (input_fd != 0)
 // 					close(input_fd);
-// 				if (cmd->next)
+// 				if (cmd->nxt)
 // 					close(pipe_fd[1]);
 // 				input_fd = pipe_fd[0]; // Pass the pipe to the next command
 // 				wait(NULL);            // Wait for the child to finish
-// 				cmd = cmd->next;
+// 				cmd = cmd->nxt;
 // 			}
 // 		}
 // 	}
@@ -154,7 +154,7 @@ bool	execute(t_data *data)
 	input_fd = 0;
 	while (cmd)
 	{
-		if (cmd->next && pipe(pipe_fd) == -1)
+		if (cmd->nxt && pipe(pipe_fd) == -1)
 		{
 			perror("pipe");
 			return (false);
@@ -172,7 +172,7 @@ bool	execute(t_data *data)
 				dup2(input_fd, STDIN_FILENO);
 				close(input_fd);
 			}
-			if (cmd->next)
+			if (cmd->nxt)
 			{
 				close(pipe_fd[0]);
 				dup2(pipe_fd[1], STDOUT_FILENO);
@@ -180,7 +180,7 @@ bool	execute(t_data *data)
 			}
 			if (is_builtin(cmd->command))
 			{
-				if (!cmd->next && is_builtin_env(cmd->command))
+				if (!cmd->nxt && is_builtin_env(cmd->command))
 					exit(0);
 				builtin_func(cmd, data);
 				exit(0);
@@ -195,7 +195,7 @@ bool	execute(t_data *data)
 		{
 			if (input_fd != 0)
 				close(input_fd);
-			if (cmd->next)
+			if (cmd->nxt)
 				close(pipe_fd[1]);
 			input_fd = pipe_fd[0];
 			if (is_builtin_env(cmd->command))
@@ -203,7 +203,7 @@ bool	execute(t_data *data)
 				builtin_func(cmd, data);
 			}
 			wait(NULL);
-			cmd = cmd->next;
+			cmd = cmd->nxt;
 		}
 	}
 	return (true);

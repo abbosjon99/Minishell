@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_lst_utils_cleanup.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:21:24 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/21 17:17:12 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:45:04 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	lst_clear_cmd(t_command **lst, void (*del)(void *))
 	temp = NULL;
 	while (*lst != NULL)
 	{
-		temp = (*lst)->next;
+		temp = (*lst)->nxt;
 		lst_delone_cmd(*lst, del);
 		*lst = temp;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:30:42 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:22:49 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:34:58 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,20 @@
 bool		data_init(t_data *data, char **env);
 void		init_io(t_command *cmd);
 
-//	utils
-int			ft_strcmp(const char *s1, const char *s2);
-int			ft_isspace(int c);
-
 // ----------------------------------------------------------------------------
 //								ENVIRONMENT
 // ----------------------------------------------------------------------------
 
-// env
-int			env_length(char **env);
-int			get_env_var_index(char **env, char *var);
-char		*get_env_var_value(char **env, char *var);
-bool		is_valid_env_var_key(char *var);
-
 // env_tools
+int			env_length(char **env);
+bool		is_valid_env_key(char *key);
+char		*get_curr_path(void);
+char		*get_env_val(char *key, t_data *data);
 char		*get_env_var(char *key, t_data *data);
-bool		change_env_var(char *key, t_data *data);
-bool		remove_env_var(char *key, t_data *data);
 
-// env_set
-bool		set_env_var(t_data *data, char *key, char *value);
+// env_change
+bool		env_change(char *var, t_data *data);
+bool		remove_env_var(char *key, t_data *data);
 
 // ----------------------------------------------------------------------------
 //								LEXER
@@ -206,8 +199,6 @@ bool		builtin_cd(char **args, t_data *data);
 bool		builtin_env(t_data *data);
 bool		builtin_unset(char **args, t_data *data);
 bool		builtin_export(char **args, t_data *data);
-bool		add_rem_env(char *var, t_data *data);
-char		*get_curr_path(void);
 
 // ----------------------------------------------------------------------------
 //								ERROR and EXIT
@@ -217,14 +208,22 @@ char		*get_curr_path(void);
 void		exit_shell(t_data *data, int exno);
 
 //	error
-int			cstm_perr(char *command, char *detail, char *error_message,
+int			perr_cstm(char *command, char *detail, char *error_message,
 				int ret_val);
 void		errmsg(char *errmsg, char *detail, int quotes);
 
-//	cleanup
+// ----------------------------------------------------------------------------
+//								CLEAN and UTTILS
+// ----------------------------------------------------------------------------
+
+//	free
 void		free_data(t_data *data, bool clear_history);
 void		free_ptr(void *ptr);
 int			free_str_arr(char **arr);
+
+//	utils
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_isspace(int c);
 
 // ----------------------------------------------------------------------------
 //								DEBUG

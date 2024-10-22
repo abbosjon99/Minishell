@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:05:49 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 17:59:42 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:45:17 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	count_arguments(t_token *temp)
 	while (temp && (temp->type == WORD || temp->type == VAR))
 	{
 		i++;
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	return (i);
 }
@@ -52,7 +52,7 @@ int	create_args_default_mode(t_token **token_node, t_command *last_cmd)
 	{
 		last_cmd->args[i] = ft_strdup(temp->str);
 		i++;
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	last_cmd->args[i] = NULL;
 	*token_node = temp;
@@ -76,7 +76,7 @@ static char	**copy_default_in_new_tab(
 	{
 		new_tab[i] = ft_strdup(temp->str);
 		i++;
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	new_tab[i] = NULL;
 	return (new_tab);
@@ -94,7 +94,7 @@ int	add_args_default_mode(t_token **token_node, t_command *last_cmd)
 	while (temp->type == WORD || temp->type == VAR)
 	{
 		i++;
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	len = 0;
 	while (last_cmd->args[len])

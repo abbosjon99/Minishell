@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:16:58 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 17:57:16 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:45:13 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	prep_no_arg_commands(t_data *data)
 			cmd->args[0] = ft_strdup(cmd->command);
 			cmd->args[1] = NULL;
 		}
-		cmd = cmd->next;
+		cmd = cmd->nxt;
 	}
 	cmd = lst_last_cmd(data->cmd);
 }
@@ -39,7 +39,7 @@ void	create_commands(t_data *data, t_token *token)
 	temp = token;
 	if (temp->type == END)
 		return ;
-	while (temp->next != NULL)
+	while (temp->nxt != NULL)
 	{
 		if (temp == token)
 			lst_add_back_cmd(&data->cmd, lst_new_cmd(false));

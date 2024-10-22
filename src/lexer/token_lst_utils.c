@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:50:28 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:03:39 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:19 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_token	*lst_new_token(char *str, char *str_backup, int type, int status)
 	new_node->type = type;
 	new_node->status = status;
 	new_node->join = false;
-	new_node->prev = NULL;
-	new_node->next = NULL;
+	new_node->prv = NULL;
+	new_node->nxt = NULL;
 	return (new_node);
 }
 
@@ -42,10 +42,10 @@ void	lst_add_back_token(t_token **alst, t_token *new_node)
 	}
 	if (alst && *alst && new_node)
 	{
-		while (start->next != NULL)
-			start = start->next;
-		start->next = new_node;
-		new_node->prev = start;
+		while (start->nxt != NULL)
+			start = start->nxt;
+		start->nxt = new_node;
+		new_node->prv = start;
 	}
 }
 
@@ -61,10 +61,10 @@ void	lstdelone_token(t_token *lst, void (*del)(void *))
 		(*del)(lst->str_backup);
 		lst->str_backup = NULL;
 	}
-	if (lst->prev)
-		lst->prev->next = lst->next;
-	if (lst->next)
-		lst->next->prev = lst->prev;
+	if (lst->prv)
+		lst->prv->nxt = lst->nxt;
+	if (lst->nxt)
+		lst->nxt->prv = lst->prv;
 	free_ptr(lst);
 }
 
@@ -75,7 +75,7 @@ void	lstclear_token(t_token **lst, void (*del)(void *))
 	tmp = NULL;
 	while (*lst != NULL)
 	{
-		tmp = (*lst)->next;
+		tmp = (*lst)->nxt;
 		lstdelone_token(*lst, del);
 		*lst = tmp;
 	}

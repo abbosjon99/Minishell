@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:22:15 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 17:56:58 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:21 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	initialize_cmd(t_command **cmd)
 	(*cmd)->args = NULL;
 	(*cmd)->pipe_output = false;
 	(*cmd)->pipe_fd = 0;
-	(*cmd)->prev = NULL;
-	(*cmd)->next = NULL;
+	(*cmd)->prv = NULL;
+	(*cmd)->nxt = NULL;
 }
 
 t_command	*lst_new_cmd(bool value)
@@ -48,16 +48,16 @@ void	lst_add_back_cmd(t_command **alst, t_command *new_node)
 	}
 	if (alst && *alst && new_node)
 	{
-		while (start->next != NULL)
-			start = start->next;
-		start->next = new_node;
-		new_node->prev = start;
+		while (start->nxt != NULL)
+			start = start->nxt;
+		start->nxt = new_node;
+		new_node->prv = start;
 	}
 }
 
 t_command	*lst_last_cmd(t_command *cmd)
 {
-	while (cmd->next != NULL)
-		cmd = cmd->next;
+	while (cmd->nxt != NULL)
+		cmd = cmd->nxt;
 	return (cmd);
 }

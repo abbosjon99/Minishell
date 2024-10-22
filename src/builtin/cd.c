@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:34:07 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:29:49 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:47:48 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ static bool	cd_helper(char *path, t_data *data)
 	if (chdir(path) != 0)
 	{
 		if (chdir(path) == EACCES)
-			cstm_perr("cd", "permission denied", path, 0);
+			perr_cstm("cd", "permission denied", path, 0);
 		else
-			cstm_perr("cd", "no such a directory", path, 0);
+			perr_cstm("cd", "no such a directory", path, 0);
 		free_ptr(path);
 		return (false);
 	}
 	free_ptr(path);
-	if (!add_rem_env(ft_strjoin("OLDPWD=", oldpwd), data))
+	if (!env_change(ft_strjoin("OLDPWD=", oldpwd), data))
 		return (false);
-	if (!add_rem_env(ft_strjoin("PWD=", get_curr_path()), data))
+	if (!env_change(ft_strjoin("PWD=", get_curr_path()), data))
 		return (false);
 	return (true);
 }
@@ -66,15 +66,14 @@ bool	builtin_cd(char **args, t_data *data)
 	args++;
 	if (!*args)
 	{
-		if (get_env_var("HOME", data))
-			return (cd_helper(get_env_var("HOME", data) + 5, data));
+		if (get_env_val("HOME", data))
+			return (cd_helper(get_env_val("HOME", data), data));
 		else
 			return (true);
 	}
 	else if (*args && args[1])
 	{
-		printf("cd: too many arguments\n");
-		return (false);
+		return (perr_cstm("cd", NULL, "too many arguments", 0));
 	}
 	else
 		cd_helper(*args, data);

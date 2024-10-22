@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_heredoc_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:09:37 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/21 17:17:12 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:47:48 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static bool	evaluate_heredoc_line(t_data *data, char **line,
 {
 	if (*line == NULL)
 	{
-		cstm_perr("warning", "here-document delimited by end-of-file: wanted",
+		perr_cstm("warning", "here-document delimited by end-of-file: wanted",
 			io->heredoc_delimiter, true);
 		*ret = true;
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 12:17:42 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:08:40 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:02 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ void	print_cmd_list(t_data *data)
 		print_cmd_args(cmd);
 		printf("\tPipe_output = %d\n", cmd->pipe_output);
 		print_cmd_io(cmd);
-		if (cmd->prev == NULL)
+		if (cmd->prv == NULL)
 			printf("\tprev = NULL\n");
 		else
-			printf("\tprev = %s\n", cmd->prev->command);
-		if (cmd->next == NULL)
+			printf("\tprev = %s\n", cmd->prv->command);
+		if (cmd->nxt == NULL)
 			printf("\tnext = NULL\n");
 		else
-			printf("\tnext = %s\n", cmd->next->command);
+			printf("\tnext = %s\n", cmd->nxt->command);
 		printf("\n");
-		cmd = cmd->next;
+		cmd = cmd->nxt;
 	}
 	printf("\n");
 }
@@ -108,15 +108,15 @@ void	print_token_list(t_token **tokens)
 		printf("\tStr backup = [%s]\n", lst->str_backup);
 		print_token_type(lst, "\tType = ");
 		printf("\tStatus = %d\n", lst->status);
-		if (lst->prev)
-			printf("\tPrev = [%p]\n", lst->prev);
+		if (lst->prv)
+			printf("\tPrev = [%p]\n", lst->prv);
 		else
 			printf("\tPrev = NULL\n");
-		if (lst->next)
-			printf("\tNext = [%p]\n", lst->next);
+		if (lst->nxt)
+			printf("\tNext = [%p]\n", lst->nxt);
 		else
 			printf("\tNext = NULL\n");
 		i++;
-		lst = lst->next;
+		lst = lst->nxt;
 	}
 }

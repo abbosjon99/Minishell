@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:02:55 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:00:23 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:45:26 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	create_args_echo_mode(t_token **token_node, t_command *last_cmd)
 		else
 			last_cmd->args[i] = ft_strdup(temp->str);
 		i++;
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	last_cmd->args[i] = NULL;
 	*token_node = temp;
@@ -71,7 +71,7 @@ int	add_args_echo_mode(t_token **token_node, t_command *last_cmd)
 	free(last_cmd->args);
 	last_cmd->args = new_tab;
 	while (temp->type == WORD || temp->type == VAR)
-		temp = temp->next;
+		temp = temp->nxt;
 	*token_node = temp;
 	return (SUCCESS);
 }

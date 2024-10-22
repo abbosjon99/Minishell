@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:20:39 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/21 17:06:44 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:47:48 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static void	open_infile(t_io_fds *io, char *file, char *original_filename)
 	io->infile = ft_strdup(file);
 	if (io->infile && io->infile[0] == '\0')
 	{
-		cstm_perr(original_filename, NULL, "ambiguous redirect", false);
+		perr_cstm(original_filename, NULL, "ambiguous redirect", false);
 		return ;
 	}
 	io->fd_in = open(io->infile, O_RDONLY);
 	if (io->fd_in == -1)
-		cstm_perr(io->infile, NULL, strerror(errno), false);
+		perr_cstm(io->infile, NULL, strerror(errno), false);
 }
 
 void	parse_input(t_command **last_cmd, t_token **token_lst)
@@ -78,10 +78,10 @@ void	parse_input(t_command **last_cmd, t_token **token_lst)
 	temp = *token_lst;
 	cmd = lst_last_cmd(*last_cmd);
 	init_io(cmd);
-	open_infile(cmd->io_fds, temp->next->str, temp->next->str_backup);
-	if (temp->next->next)
-		temp = temp->next->next;
+	open_infile(cmd->io_fds, temp->nxt->str, temp->nxt->str_backup);
+	if (temp->nxt->nxt)
+		temp = temp->nxt->nxt;
 	else
-		temp = temp->next;
+		temp = temp->nxt;
 	*token_lst = temp;
 }

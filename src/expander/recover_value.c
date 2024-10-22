@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:26:14 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:05:42 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:12:30 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*recover_val(t_token *token, char *str, t_data *data)
 		value = search_env_var(data, var);
 	}
 	else if (var && var[0] == '?' && var[1] == '=')
-		value = ft_itoa(0);
+		value = ft_itoa(g_exit_code);
 	else
 		value = NULL;
 	free_ptr(var);

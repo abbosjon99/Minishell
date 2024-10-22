@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definitions.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 23:52:52 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:07:57 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:54:48 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_token
 	int					type;
 	int					status;
 	bool				join;
-	struct s_token		*prev;
-	struct s_token		*next;
+	struct s_token		*prv;
+	struct s_token		*nxt;
 }						t_token;
 typedef struct s_io_fds
 {
@@ -54,15 +54,15 @@ typedef struct s_command
 	bool				pipe_output;
 	int					*pipe_fd;
 	t_io_fds			*io_fds;
-	struct s_command	*next;
-	struct s_command	*prev;
+	struct s_command	*nxt;
+	struct s_command	*prv;
 }						t_command;
 
 typedef struct s_data
 {
 	bool				is_intrctv;
 	t_token				*token;
-	char				*user_input;
+	char				*rl_input;
 	char				**env;
 	t_command			*cmd;
 }						t_data;
@@ -96,7 +96,7 @@ enum					e_quoting_status
 // ----------------------------------------------------------------------------
 
 # define PROMPT "•\001\033[1;92m\002 Minishell>$ \001\033[0;97m\002"
-# define ERROR_PROMPT "\001\033[1;91m\002•\001\033[1;92m\002 \
+# define ERR_PROMPT "\001\033[1;91m\002•\001\033[1;92m\002 \
 Minishell>$ \001\033[0;97m\002"
 
 # define HEREDOC_NAME "/tmp/.minishell_heredoc_"

@@ -3,54 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 16:34:07 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:22:50 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:55:46 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static bool	export_adder(char *str, t_data *data)
-{
-	char	**new_env;
-	char	**dest;
-	char	**src;
-
-	new_env = ft_calloc(env_length(data->env) + 2, sizeof(data->env));
-	if (!new_env)
-		return (false);
-	dest = new_env;
-	src = data->env;
-	while (*src)
-	{
-		*dest = ft_strdup(*src);
-		if (!*dest)
-			return (free_str_arr(new_env));
-		dest++;
-		src++;
-	}
-	*dest = ft_strdup(str);
-	if (!*dest)
-		return (free_str_arr(new_env));
-	dest[1] = NULL;
-	free_str_arr(data->env);
-	data->env = new_env;
-	return (true);
-}
-
-// addes or replaces variable in env
-bool	add_rem_env(char *var, t_data *data)
-{
-	if (get_env_var(var, data))
-	{
-		if (!change_env_var(var, data))
-			return (false);
-	}
-	else
-		return (export_adder(var, data));
-}
 
 bool	builtin_export(char **args, t_data *data)
 {
@@ -61,9 +21,13 @@ bool	builtin_export(char **args, t_data *data)
 	args++;
 	if (!*args)
 		return (builtin_env(data));
+	if (!is_valid_env_key(*args))
+		return (perr_cstm("export", *args, "not a valid identifier", 0));
 	while (*args)
 	{
-		add_rem_env(*args, data);
+		if (!ft_strchr(*args, '=') && args++)
+			continue ;
+		env_change(*args, data);
 		args++;
 	}
 	return (true);

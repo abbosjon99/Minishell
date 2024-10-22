@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:10:55 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:03:24 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:15 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	link_extremities(t_token *to_del, t_token *temp, t_token *insert)
 {
 	while (temp != to_del)
-		temp = temp->next;
-	insert->prev = temp->prev;
-	temp->prev->next = insert;
-	while (insert->next)
-		insert = insert->next;
-	temp->next->prev = insert;
-	insert->next = temp->next;
+		temp = temp->nxt;
+	insert->prv = temp->prv;
+	temp->prv->nxt = insert;
+	while (insert->nxt)
+		insert = insert->nxt;
+	temp->nxt->prv = insert;
+	insert->nxt = temp->nxt;
 }
 
 t_token	*insert_lst_between(t_token **head, t_token *to_del, t_token *insert)
@@ -34,9 +34,9 @@ t_token	*insert_lst_between(t_token **head, t_token *to_del, t_token *insert)
 	else if (temp == to_del)
 	{
 		*head = insert;
-		insert->next = temp->next;
-		if (temp->next != NULL)
-			temp->next->prev = insert;
+		insert->nxt = temp->nxt;
+		if (temp->nxt != NULL)
+			temp->nxt->prv = insert;
 	}
 	else
 		link_extremities(to_del, temp, insert);

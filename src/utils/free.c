@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:05:55 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:09:51 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:35:41 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	free_str_arr(char **arr)
 */
 void	free_data(t_data *data, bool clear_history)
 {
-	if (data && data->user_input)
+	if (data && data->rl_input)
 	{
-		free_ptr(data->user_input);
-		data->user_input = NULL;
+		free_ptr(data->rl_input);
+		data->rl_input = NULL;
 	}
 	if (data && data->token)
 		lstclear_token(&data->token, &free_ptr);
@@ -57,7 +57,6 @@ void	free_data(t_data *data, bool clear_history)
 		rl_clear_history();
 	}
 }
-
 
 // For freing pointer and setting it to NULL
 // WHY: to avoid double freeing

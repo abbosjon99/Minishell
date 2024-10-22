@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:40:24 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:02:30 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:06 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	variable_check(t_token **token_node)
 	{
 		if ((*token_node)->str[i] == '$')
 		{	
-			if ((*token_node)->prev && (*token_node)->prev->type == HEREDOC)
+			if ((*token_node)->prv && (*token_node)->prv->type == HEREDOC)
 				break ;
 			(*token_node)->type = VAR;
 			return ;
@@ -45,7 +45,7 @@ int	check_if_var(t_token **token_lst)
 		variable_check(&temp);
 		if (check_consecutives(&temp) == FAILURE)
 			return (FAILURE);
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 02:35:14 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:06:28 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:44:49 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	var_expander(t_data *data, t_token **token_lst)
 					i++;
 			}
 		}
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	return (0);
 }

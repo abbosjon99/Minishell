@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:39:40 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:05:10 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:05 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	handle_quotes(t_data *data)
 	while (temp)
 	{
 		if (quotes_in_string(temp->str) == true
-			&& (!temp->prev || (temp->prev && temp->prev->type != HEREDOC)))
+			&& (!temp->prv || (temp->prv && temp->prv->type != HEREDOC)))
 			remove_quotes(&temp);
-		temp = temp->next;
+		temp = temp->nxt;
 	}
 	return (0);
 }

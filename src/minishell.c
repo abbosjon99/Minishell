@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:06:11 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 19:24:38 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 22:09:30 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			g_exit_code;
 
 //	Initial checking the arguments:
 //	-if any error prints error
@@ -45,10 +47,10 @@ void	minishell_interactive(t_data *data)
 {
 	while (1)
 	{
-		data->user_input = readline(PROMPT);
+		data->rl_input = readline(PROMPT);
 		if (parse_user_input(data) == true)
 			execute(data);
-		//print_all_data(data);
+		// print_all_data(data);
 		free_data(data, false);
 	}
 }
@@ -75,7 +77,7 @@ void	minishell_noninteractive(t_data *data, char *arg)
 	i = 0;
 	while (user_inputs[i])
 	{
-		data->user_input = ft_strdup(user_inputs[i]);
+		data->rl_input = ft_strdup(user_inputs[i]);
 		if (parse_user_input(data) == true)
 			execute(data);
 		else
@@ -99,6 +101,7 @@ int	main(int argc, char **argv, char **env)
 	ft_memset(&data, 0, sizeof(t_data));
 	if (!argv_check(&data, argc, argv) || !data_init(&data, env))
 		exit_shell(NULL, EXIT_FAILURE);
+	printf("%i\n", g_exit_code);
 	if (data.is_intrctv)
 		minishell_interactive(&data);
 	else

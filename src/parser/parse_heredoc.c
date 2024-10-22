@@ -6,7 +6,7 @@
 /*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:09:01 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/20 18:01:20 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:45:36 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ void	parse_heredoc(t_data *data, t_command **last_cmd, t_token **token_lst)
 	if (!remove_old_file_ref(io, true))
 		return ;
 	io->infile = get_heredoc_name();
-	io->heredoc_delimiter = get_delim(temp->next->str, &(io->heredoc_quotes));
+	io->heredoc_delimiter = get_delim(temp->nxt->str, &(io->heredoc_quotes));
 	if (get_heredoc(data, io))
 		io->fd_in = open(io->infile, O_RDONLY);
 	else
 		io->fd_in = -1;
-	if (temp->next->next)
-		temp = temp->next->next;
+	if (temp->nxt->nxt)
+		temp = temp->nxt->nxt;
 	else
-		temp = temp->next;
+		temp = temp->nxt;
 	*token_lst = temp;
 }

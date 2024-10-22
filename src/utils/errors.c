@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:06:15 by akeldiya          #+#    #+#             */
-/*   Updated: 2024/10/21 17:12:59 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:47:48 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool	add_detail_quotes(char *command)
 
 // Prints error message on fd[2] to similar to perror
 // returns error value
-int	cstm_perr(char *command, char *err_msg, char *err_arg, int ret_val)
+int	perr_cstm(char *command, char *err_msg, char *err_arg, int ret_val)
 {
 	char	*msg;
 	bool	detail_quotes;

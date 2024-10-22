@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akeldiya <akeldiya@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akeldiya <akeldiya@student.42warsaw.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 00:21:47 by zkaroune          #+#    #+#             */
-/*   Updated: 2024/10/21 17:17:12 by akeldiya         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:46:23 by akeldiya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void	parse_word(t_command **cmd, t_token **token_lst)
 	while (temp->type == WORD || temp->type == VAR)
 	{
 		last_cmd = lst_last_cmd(*cmd);
-		if (temp->prev == NULL || (temp->prev && temp->prev->type == PIPE)
+		if (temp->prv == NULL || (temp->prv && temp->prv->type == PIPE)
 			|| last_cmd->command == NULL)
 		{
 			if (temp->type == VAR && contains_space(temp->str))
 				split_var_cmd_token(last_cmd, temp->str);
 			else
 				last_cmd->command = ft_strdup(temp->str);
-			temp = temp->next;
+			temp = temp->nxt;
 		}
 		else
 			fill_args(&temp, last_cmd);
